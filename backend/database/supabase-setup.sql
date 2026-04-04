@@ -1,4 +1,4 @@
--- M-Restore Supabase Database Setup
+-- Terra AI Supabase Database Setup
 -- Run this SQL in your Supabase project's SQL Editor
 
 -- Enable necessary extensions
@@ -141,4 +141,5 @@ GRANT ALL ON land_images TO anon, authenticated;
 GRANT ALL ON analysis_results TO anon, authenticated;
 
 -- Success message
-SELECT 'M-Restore database setup completed successfully!' as status;
+SELECT 'Terra AI database setup completed successfully!' as status;
+

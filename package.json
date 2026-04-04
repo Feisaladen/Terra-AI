@@ -1,11 +1,11 @@
 {
-  "name": "m-restore-backend",
+  "name": "dhulreje-backend",
   "version": "1.0.0",
-  "description": "Backend API for M-Restore AI image analysis",
-  "main": "server.js",
+  "description": "Backend API for Terra AI image analysis",
+  "main": "backend/server.js",
   "scripts": {
-    "start": "node server.js",
-    "dev": "nodemon server.js",
+    "start": "node backend/server.js",
+    "dev": "nodemon backend/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [

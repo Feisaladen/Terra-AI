@@ -1,5 +1,6 @@
 // Script to update Supabase credentials in all files
 const fs = require('fs');
+const path = require('path');
 const readline = require('readline');
 
 const rl = readline.createInterface({
@@ -14,7 +15,11 @@ async function askQuestion(question) {
 }
 
 async function updateCredentials() {
-  console.log('🔧 M-Restore Supabase Configuration Updater\n');
+  const projectRoot = path.resolve(__dirname, '..', '..');
+  const envPath = path.join(projectRoot, 'backend', '.env');
+  const supabaseJsPath = path.join(projectRoot, 'frontend', 'scripts', 'supabase.js');
+
+  console.log('🔧 Terra AI Supabase Configuration Updater\n');
   
   console.log('📋 Please provide your new Supabase credentials:');
   console.log('1. Go to your Supabase project dashboard');
@@ -46,7 +51,7 @@ GOOGLE_GEMINI_API_KEY=${process.env.GOOGLE_GEMINI_API_KEY || 'your_gemini_api_ke
 PORT=3000
 NODE_ENV=development`;
     
-    fs.writeFileSync('.env', envContent);
+    fs.writeFileSync(envPath, envContent);
     console.log('✅ .env file updated');
     
     // Update supabase.js file
@@ -175,15 +180,14 @@ Object.defineProperty(window, 'supabase', {
   configurable: true
 });`;
     
-    fs.writeFileSync('supabase.js', supabaseJsContent);
+    fs.writeFileSync(supabaseJsPath, supabaseJsContent);
     console.log('✅ supabase.js file updated');
     
     console.log('\n🎉 Configuration updated successfully!');
     console.log('\n📋 Next steps:');
     console.log('1. Run the SQL setup in your Supabase project');
     console.log('2. Restart your servers:');
-    console.log('   - Backend: node server.js');
-    console.log('   - Frontend: node serve-frontend.js');
+    console.log('   - App: npm start');
     console.log('3. Test the signup/login flow');
     
   } catch (error) {
@@ -194,3 +198,4 @@ Object.defineProperty(window, 'supabase', {
 }
 
 updateCredentials();
+
