@@ -1,0 +1,216 @@
+:root {
+  --bg-cream: #f6f2e9;
+  --bg-mist: #edf2e7;
+  --ink-900: #1f2a20;
+  --ink-700: #4a5949;
+  --leaf-800: #294132;
+  --leaf-700: #3f6143;
+  --leaf-500: #608d5b;
+  --leaf-300: #a9c390;
+  --earth-500: #a17351;
+  --gold-300: #efc783;
+  --line-soft: rgba(45, 68, 49, 0.12);
+  --glass: rgba(255, 250, 242, 0.8);
+  --shadow-soft: 0 24px 70px rgba(42, 62, 45, 0.14);
+  --shadow-strong: 0 34px 110px rgba(20, 29, 22, 0.34);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { font-family: "Sora", system-ui, sans-serif; color: var(--ink-900); }
+h1, h2, h3, .display-font { font-family: "Cormorant Garamond", Georgia, serif; }
+
+.terra-page {
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  background:
+    radial-gradient(circle at top left, rgba(255, 237, 196, 0.88), transparent 28%),
+    radial-gradient(circle at top right, rgba(136, 170, 124, 0.18), transparent 22%),
+    linear-gradient(180deg, var(--bg-cream) 0%, var(--bg-mist) 100%);
+}
+.terra-page::before,
+.terra-page::after {
+  content: "";
+  position: fixed;
+  width: 20rem;
+  height: 20rem;
+  border-radius: 9999px;
+  pointer-events: none;
+  filter: blur(24px);
+  z-index: 0;
+}
+.terra-page::before { top: -6rem; right: -5rem; background: rgba(102, 144, 92, 0.18); }
+.terra-page::after { left: -6rem; bottom: -8rem; background: rgba(226, 183, 110, 0.18); }
+.page-shell { position: relative; z-index: 1; }
+.terra-panel {
+  background: var(--glass);
+  border: 1px solid var(--line-soft);
+  box-shadow: var(--shadow-soft);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+.terra-card {
+  background: linear-gradient(180deg, rgba(255, 252, 247, 0.92), rgba(248, 244, 235, 0.88));
+  border: 1px solid rgba(58, 85, 59, 0.1);
+  box-shadow: 0 20px 54px rgba(55, 68, 52, 0.11);
+}
+.terra-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 9999px;
+  padding: 0.55rem 0.9rem;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+.terra-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  border-radius: 9999px;
+  padding: 0.55rem 0.85rem;
+  background: rgba(86, 125, 76, 0.1);
+  border: 1px solid rgba(86, 125, 76, 0.12);
+  color: var(--leaf-700);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+.terra-btn-primary,
+.terra-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  min-height: 3.2rem;
+  padding: 0.95rem 1.4rem;
+  border-radius: 9999px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
+}
+.terra-btn-primary {
+  color: #fffdf7;
+  background: linear-gradient(135deg, #2e4f39 0%, #537e4e 55%, #7eaa62 100%);
+  box-shadow: 0 16px 38px rgba(53, 84, 57, 0.26);
+}
+.terra-btn-primary:hover { box-shadow: 0 22px 44px rgba(53, 84, 57, 0.32); }
+.terra-btn-secondary {
+  color: var(--leaf-800);
+  background: rgba(255, 252, 244, 0.9);
+  border: 1px solid rgba(52, 75, 55, 0.14);
+}
+.terra-btn-primary:focus-visible,
+.terra-btn-secondary:focus-visible,
+.terra-link:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.9);
+  outline-offset: 3px;
+}
+.terra-btn-primary:hover,
+.terra-btn-secondary:hover { transform: translateY(-2px); }
+.terra-link { color: var(--leaf-700); text-decoration: none; }
+.terra-link:hover { text-decoration: underline; }
+.terra-field {
+  width: 100%;
+  border-radius: 1rem;
+  border: 1px solid rgba(60, 87, 63, 0.14);
+  background: rgba(255, 252, 247, 0.94);
+  padding: 0.95rem 1rem;
+  color: var(--ink-900);
+  outline: none;
+  transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+}
+.terra-field:focus {
+  border-color: rgba(82, 122, 78, 0.5);
+  box-shadow: 0 0 0 4px rgba(119, 157, 108, 0.12);
+  transform: translateY(-1px);
+}
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(115deg, rgba(14, 20, 16, 0.8) 8%, rgba(24, 40, 29, 0.58) 48%, rgba(31, 48, 34, 0.22) 100%),
+    radial-gradient(circle at top right, rgba(255, 208, 133, 0.26), transparent 24%);
+}
+.section-kicker {
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+.soft-text { color: rgba(248, 242, 232, 0.78); }
+.analysis-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+}
+.terra-stat {
+  position: relative;
+  overflow: hidden;
+}
+.terra-stat::after {
+  content: "";
+  position: absolute;
+  right: -2rem;
+  bottom: -2rem;
+  width: 6rem;
+  height: 6rem;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.28);
+}
+.message-box {
+  min-height: 3.5rem;
+  border-radius: 1.2rem;
+  background: rgba(255, 248, 236, 0.72);
+  padding: 0.9rem 1rem;
+  color: var(--ink-700);
+  white-space: pre-line;
+}
+.hero-left-glow {
+  position: absolute;
+  left: -4rem;
+  top: 18%;
+  width: 22rem;
+  height: 22rem;
+  border-radius: 9999px;
+  background: rgba(239, 199, 131, 0.18);
+  filter: blur(42px);
+  pointer-events: none;
+}
+.hero-bottom-glow {
+  position: absolute;
+  right: 6%;
+  bottom: 8%;
+  width: 18rem;
+  height: 18rem;
+  border-radius: 9999px;
+  background: rgba(117, 161, 97, 0.16);
+  filter: blur(36px);
+  pointer-events: none;
+}
+.hero-feature-card {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.08));
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+.hero-side-panel {
+  background: linear-gradient(180deg, rgba(16, 24, 18, 0.66), rgba(20, 31, 23, 0.56));
+}
+.hero-metric {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.photo-card-overlay {
+  background:
+    linear-gradient(180deg, rgba(18, 26, 19, 0.02), rgba(18, 26, 19, 0.5) 100%),
+    linear-gradient(90deg, rgba(18, 26, 19, 0.38), rgba(18, 26, 19, 0.02));
+}
+@media (max-width: 768px) {
+  .terra-page::before,
+  .terra-page::after { width: 13rem; height: 13rem; }
+  .hero-left-glow,
+  .hero-bottom-glow { display: none; }
+}

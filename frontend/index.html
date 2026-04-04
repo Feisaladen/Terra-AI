@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Terra AI - Heal the Soil. Grow the Future.</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='16'>*</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Sora:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles/theme.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@supabase/supabase-js@2/dist/supabase.min.js"></script>
+    <script src="scripts/supabase.js"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              earth: {
+                50: "#faf5f1", 100: "#f0e6d8", 200: "#e5d5bb", 300: "#d4b995", 400: "#c4a077",
+                500: "#ab835b", 600: "#8e6846", 700: "#735338", 800: "#5f442f", 900: "#4f392a"
+              },
+              leaf: {
+                50: "#f4f9f0", 100: "#e5f1dd", 200: "#cce3bf", 300: "#a9ce95", 400: "#85b66c",
+                500: "#659a4b", 600: "#4d7b37", 700: "#3f612e", 800: "#364f28", 900: "#2e4223"
+              }
+            },
+            keyframes: {
+              "rise-in": {
+                "0%": { opacity: "0", transform: "translateY(20px)" },
+                "100%": { opacity: "1", transform: "translateY(0)" }
+              }
+            },
+            animation: {
+              "rise-in": "rise-in 0.8s ease-out forwards"
+            }
+          }
+        }
+      };
+    </script>
+  </head>
+  <body class="terra-page">
+    <div class="page-shell relative">
+      <header class="absolute inset-x-0 top-0 z-20">
+        <div class="mx-auto max-w-7xl px-4 py-5 sm:px-6 lg:px-8">
+          <div class="flex items-center justify-between rounded-full border border-white/12 bg-[rgba(16,24,18,0.34)] px-5 py-3 text-white backdrop-blur-xl">
+            <div class="flex items-center gap-3">
+              <div class="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-lg">+</div>
+              <div>
+                <p class="text-sm font-semibold tracking-[0.28em] text-white/72 uppercase">Terra AI</p>
+              </div>
+            </div>
+            <nav class="hidden items-center gap-8 text-sm text-white/76 md:flex">
+              <a href="#platform" class="hover:text-white transition-colors">Platform</a>
+              <a href="#workflow" class="hover:text-white transition-colors">Workflow</a>
+              <a href="#why" class="hover:text-white transition-colors">Why Terra</a>
+            </nav>
+            <div class="flex items-center gap-3">
+              <a href="login.html" class="rounded-full px-4 py-2 text-sm text-white/82 transition hover:bg-white/8 hover:text-white">Log In</a>
+              <a href="signup.html" class="terra-btn-secondary min-h-0 bg-white px-4 py-2 text-sm text-[color:var(--leaf-800)]">Get Started</a>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main>
+        <section class="relative isolate min-h-[100svh] overflow-hidden">
+          <img src="./assets/hero-background.png" alt="Soil and farmland landscape" class="absolute inset-0 h-full w-full object-cover" />
+          <div class="hero-overlay"></div>
+          <div class="hero-left-glow"></div>
+          <div class="hero-bottom-glow"></div>
+
+          <div class="relative z-10 mx-auto flex min-h-[100svh] max-w-7xl items-center px-4 pb-14 pt-28 sm:px-6 lg:px-8">
+            <div class="grid w-full gap-10 lg:grid-cols-[1.02fr_0.98fr] lg:items-end">
+              <div class="animate-rise-in">
+                <div class="terra-chip bg-white/10 text-white">Soil intelligence for restoration teams</div>
+                <h1 class="mt-7 max-w-4xl text-6xl leading-[0.9] text-white sm:text-7xl lg:text-[5.8rem]">
+                  Understand the land before you act on it.
+                </h1>
+                <p class="mt-6 max-w-2xl text-base leading-7 text-white/78 sm:text-lg">
+                  Terra AI helps you upload field images, analyze visible soil conditions, and turn them into practical restoration guidance and crop suggestions.
+                </p>
+
+                <div class="mt-8 flex flex-wrap gap-4">
+                  <a href="signup.html" class="terra-btn-primary">Start Free</a>
+                  <a href="login.html" class="terra-btn-secondary border-white/12 bg-white/8 text-white">Open Dashboard</a>
+                </div>
+
+                <div class="mt-10 grid max-w-3xl gap-4 sm:grid-cols-3">
+                  <div class="hero-feature-card rounded-[1.5rem] p-5 backdrop-blur">
+                    <p class="section-kicker text-amber-100/80">Image Analysis</p>
+                    <p class="mt-3 text-base leading-6 text-white">Upload a field photo and get structured soil observations in seconds.</p>
+                  </div>
+                  <div class="hero-feature-card rounded-[1.5rem] p-5 backdrop-blur">
+                    <p class="section-kicker text-amber-100/80">Recommendations</p>
+                    <p class="mt-3 text-base leading-6 text-white">Receive practical steps for restoration, improvement, and next actions.</p>
+                  </div>
+                  <div class="hero-feature-card rounded-[1.5rem] p-5 backdrop-blur">
+                    <p class="section-kicker text-amber-100/80">Crop Fit</p>
+                    <p class="mt-3 text-base leading-6 text-white">See crop suggestions aligned to visible conditions and field context.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="animate-rise-in lg:justify-self-end">
+                <div class="hero-side-panel max-w-xl rounded-[2rem] border border-white/12 p-6 text-white shadow-[var(--shadow-strong)] backdrop-blur-xl sm:p-8">
+                  <div class="flex items-start justify-between gap-4">
+                    <div>
+                      <p class="section-kicker text-amber-100/80">Product Snapshot</p>
+                      <h2 class="mt-3 text-4xl leading-none text-white">One workflow from image to insight.</h2>
+                    </div>
+                    <div class="rounded-full border border-white/10 bg-white/8 px-4 py-2 text-sm text-white/82">Live</div>
+                  </div>
+
+                  <div class="mt-8 space-y-4">
+                    <div class="hero-feature-card rounded-[1.4rem] p-4">
+                      <p class="text-sm font-semibold text-white">Upload and inspect</p>
+                      <p class="mt-2 text-sm leading-6 text-white/72">Start with a recent image of soil, ground cover, or field surface conditions.</p>
+                    </div>
+                    <div class="hero-feature-card rounded-[1.4rem] p-4">
+                      <p class="text-sm font-semibold text-white">AI-generated summaries</p>
+                      <p class="mt-2 text-sm leading-6 text-white/72">Receive a readable breakdown of what the model sees and what it suggests.</p>
+                    </div>
+                    <div class="hero-feature-card rounded-[1.4rem] p-4">
+                      <p class="text-sm font-semibold text-white">Track over time</p>
+                      <p class="mt-2 text-sm leading-6 text-white/72">Keep your analyses in one dashboard so the land story stays visible.</p>
+                    </div>
+                  </div>
+
+                  <div class="mt-8 grid gap-3 sm:grid-cols-2">
+                    <div class="hero-metric rounded-[1.2rem] p-4">
+                      <p class="text-xs uppercase tracking-[0.22em] text-white/55">Primary Use</p>
+                      <p class="mt-2 text-2xl font-semibold text-white">Field restoration</p>
+                    </div>
+                    <div class="hero-metric rounded-[1.2rem] p-4">
+                      <p class="text-xs uppercase tracking-[0.22em] text-white/55">Output</p>
+                      <p class="mt-2 text-2xl font-semibold text-white">Clear next steps</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="platform" class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+          <div class="grid gap-6 lg:grid-cols-[0.92fr_1.08fr] lg:items-start">
+            <div>
+              <div class="terra-badge">Platform</div>
+              <h2 class="mt-5 max-w-xl text-5xl leading-none text-[color:var(--ink-900)]">A cleaner product experience for field decisions.</h2>
+              <p class="mt-5 max-w-xl text-base leading-7 text-[color:var(--ink-700)]">
+                Terra AI is designed to reduce guesswork. Instead of scattered notes and one-off observations, the product gives you a simple path from image upload to consistent analysis.
+              </p>
+            </div>
+            <div class="grid gap-5 sm:grid-cols-2">
+              <article class="rounded-[1.8rem] terra-card p-6">
+                <p class="section-kicker text-[color:var(--leaf-700)]">01</p>
+                <h3 class="mt-4 text-3xl leading-none text-[color:var(--ink-900)]">Focused upload flow</h3>
+                <p class="mt-3 text-sm leading-6 text-[color:var(--ink-700)]">A straightforward upload experience that stays calm and readable on both desktop and mobile.</p>
+              </article>
+              <article class="rounded-[1.8rem] terra-card p-6">
+                <p class="section-kicker text-[color:var(--leaf-700)]">02</p>
+                <h3 class="mt-4 text-3xl leading-none text-[color:var(--ink-900)]">Useful AI summaries</h3>
+                <p class="mt-3 text-sm leading-6 text-[color:var(--ink-700)]">Outputs are structured for real use, not just novelty, so recommendations are easier to act on.</p>
+              </article>
+              <article class="rounded-[1.8rem] terra-card p-6">
+                <p class="section-kicker text-[color:var(--leaf-700)]">03</p>
+                <h3 class="mt-4 text-3xl leading-none text-[color:var(--ink-900)]">Readable dashboard</h3>
+                <p class="mt-3 text-sm leading-6 text-[color:var(--ink-700)]">Recent analyses, states, and suggested actions stay in one place for better follow-through.</p>
+              </article>
+              <article class="rounded-[1.8rem] terra-card p-6">
+                <p class="section-kicker text-[color:var(--leaf-700)]">04</p>
+                <h3 class="mt-4 text-3xl leading-none text-[color:var(--ink-900)]">Built for restoration</h3>
+                <p class="mt-3 text-sm leading-6 text-[color:var(--ink-700)]">The visual language and workflow both support sustainability, crop planning, and land recovery.</p>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section id="workflow" class="border-y border-[rgba(53,95,66,0.08)] bg-[rgba(255,252,246,0.72)]">
+          <div class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+            <div class="mb-12 max-w-2xl">
+              <div class="terra-badge">Workflow</div>
+              <h2 class="mt-5 text-5xl leading-none text-[color:var(--ink-900)]">How Terra AI works in practice.</h2>
+            </div>
+            <div class="grid gap-5 lg:grid-cols-3">
+              <div class="rounded-[1.8rem] terra-card p-6">
+                <div class="inline-flex h-11 w-11 items-center justify-center rounded-full bg-[rgba(93,143,87,0.12)] text-[color:var(--leaf-700)] font-semibold">1</div>
+                <h3 class="mt-5 text-3xl leading-none text-[color:var(--ink-900)]">Capture the land</h3>
+                <p class="mt-3 text-sm leading-6 text-[color:var(--ink-700)]">Take a recent image with enough visible texture, ground detail, and context from the field.</p>
+              </div>
+              <div class="rounded-[1.8rem] terra-card p-6">
+                <div class="inline-flex h-11 w-11 items-center justify-center rounded-full bg-[rgba(239,199,131,0.18)] text-[color:var(--earth-500)] font-semibold">2</div>
+                <h3 class="mt-5 text-3xl leading-none text-[color:var(--ink-900)]">Analyze with AI</h3>
+                <p class="mt-3 text-sm leading-6 text-[color:var(--ink-700)]">The platform interprets visible cues and returns a clear summary instead of raw model output.</p>
+              </div>
+              <div class="rounded-[1.8rem] terra-card p-6">
+                <div class="inline-flex h-11 w-11 items-center justify-center rounded-full bg-[rgba(70,92,80,0.1)] text-[color:var(--ink-700)] font-semibold">3</div>
+                <h3 class="mt-5 text-3xl leading-none text-[color:var(--ink-900)]">Take the next step</h3>
+                <p class="mt-3 text-sm leading-6 text-[color:var(--ink-700)]">Use recommendations and crop suggestions to guide restoration decisions with more confidence.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="why" class="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+          <div class="rounded-[2rem] terra-panel grid gap-8 overflow-hidden p-6 sm:p-8 lg:grid-cols-[1fr_auto] lg:items-end lg:p-10">
+            <div>
+              <div class="terra-badge">Why Terra AI</div>
+              <h2 class="mt-5 max-w-3xl text-5xl leading-none text-[color:var(--ink-900)]">Designed to feel calm, credible, and ready for real use.</h2>
+              <p class="mt-5 max-w-2xl text-base leading-7 text-[color:var(--ink-700)]">
+                The goal is not just to look modern. It is to make land analysis easier to trust, easier to revisit, and easier to act on.
+              </p>
+            </div>
+            <div class="flex flex-wrap gap-4">
+              <a href="signup.html" class="terra-btn-primary">Create Account</a>
+              <a href="login.html" class="terra-btn-secondary">Log In</a>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>
