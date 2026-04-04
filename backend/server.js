@@ -46,6 +46,21 @@ app.get('/api/health', (req, res) => {
   });
 });
 
+app.get('/api/config', (req, res) => {
+  if (!process.env.SUPABASE_URL || !process.env.SUPABASE_ANON_KEY) {
+    return res.status(500).json({
+      success: false,
+      error: 'Supabase public configuration is missing'
+    });
+  }
+
+  res.json({
+    success: true,
+    supabaseUrl: process.env.SUPABASE_URL,
+    supabaseAnonKey: process.env.SUPABASE_ANON_KEY
+  });
+});
+
 app.get('/', (req, res) => {
   res.sendFile(path.join(frontendDir, 'index.html'));
 });

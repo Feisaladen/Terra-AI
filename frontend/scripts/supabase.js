@@ -1,13 +1,9 @@
-// supabase.js — Initialize Supabase for auth only
-
-// Configuration
-const SUPABASE_URL = 'https://thgacoqqzvpduydazujh.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRoZ2Fjb3FxenZwZHV5ZGF6dWpoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njk5Njk5ODQsImV4cCI6MjA4NTU0NTk4NH0.Gu7_7YVOvPW94JVqN96dHMv-rCCVeGNxnvHzdyoQMwE';
+// supabase.js - Initialize Supabase for auth using runtime config from the backend
 
 let supabaseClient = null;
 let isInitialized = false;
+let publicConfig = null;
 
-// Wait for Supabase CDN to load
 function waitForSupabaseCDN() {
   return new Promise((resolve, reject) => {
     let attempts = 0;
@@ -16,10 +12,8 @@ function waitForSupabaseCDN() {
     const checkSupabase = () => {
       attempts++;
       if (typeof window.supabase !== 'undefined' && window.supabase.createClient) {
-        console.log('✅ Supabase CDN loaded');
         resolve(true);
       } else if (attempts >= maxAttempts) {
-        console.error('❌ Supabase CDN failed to load');
         loadAlternativeSupabase().then(resolve).catch(reject);
       } else {
         setTimeout(checkSupabase, 100);
@@ -30,23 +24,40 @@ function waitForSupabaseCDN() {
   });
 }
 
-// Load alternative CDN
 function loadAlternativeSupabase() {
   return new Promise((resolve, reject) => {
     const script = document.createElement('script');
     script.src = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
-    script.onload = () => {
-      console.log('✅ Alternative Supabase CDN loaded');
-      resolve(true);
-    };
-    script.onerror = () => {
-      reject(new Error('❌ Failed to load Supabase'));
-    };
+    script.onload = () => resolve(true);
+    script.onerror = () => reject(new Error('Failed to load Supabase CDN'));
     document.head.appendChild(script);
   });
 }
 
-// Initialize Supabase client
+async function loadPublicConfig() {
+  if (publicConfig) {
+    return publicConfig;
+  }
+
+  const response = await fetch('/api/config', {
+    headers: {
+      Accept: 'application/json'
+    }
+  });
+
+  const payload = await response.json();
+  if (!response.ok || !payload.success) {
+    throw new Error(payload.error || 'Failed to load public app config');
+  }
+
+  publicConfig = {
+    supabaseUrl: payload.supabaseUrl,
+    supabaseAnonKey: payload.supabaseAnonKey
+  };
+
+  return publicConfig;
+}
+
 async function initializeSupabase() {
   if (isInitialized && supabaseClient) {
     return supabaseClient;
@@ -54,20 +65,17 @@ async function initializeSupabase() {
 
   try {
     await waitForSupabaseCDN();
-    supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    const config = await loadPublicConfig();
+    supabaseClient = window.supabase.createClient(config.supabaseUrl, config.supabaseAnonKey);
     isInitialized = true;
-
-    console.log('✅ Supabase client initialized');
-
     window.supabase = supabaseClient;
     return supabaseClient;
   } catch (error) {
-    console.error('❌ Supabase init failed:', error);
+    console.error('Supabase init failed:', error);
     return null;
   }
 }
 
-// Helper: get current user
 async function currentUser() {
   const client = await initializeSupabase();
   if (!client) return null;
@@ -81,13 +89,12 @@ async function currentUser() {
   }
 }
 
-// Export only necessary helpers
 window.supabaseHelpers = {
   currentUser,
-  initializeSupabase
+  initializeSupabase,
+  loadPublicConfig
 };
 
-// Auto-initialize if DOM is ready
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', initializeSupabase);
 } else {
