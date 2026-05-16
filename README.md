@@ -12,8 +12,8 @@ Terra AI is a soil and land analysis web app for restoration-focused workflows. 
 
 ## Project structure
 
-```text
-M-restore/
+```text 
+Terra-Ai/
   backend/
     .env
     database/
