@@ -17,8 +17,7 @@ Terra-Ai/
   backend/
     .env
     database/
-      supabase-schema.sql
-      supabase-setup.sql
+      Supabase 
     scripts/
       update-supabase-config.js
       update-supabase-credentials.js
