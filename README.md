@@ -1,4 +1,4 @@
-# Terra AI
+# Terra AI 
 
 Terra AI is a soil and land analysis web app for restoration-focused workflows. Users sign in, upload field images, and receive AI-generated observations, recommendations, and crop suggestions from one simple interface.
 
